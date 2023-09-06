@@ -7,12 +7,16 @@
 - Trader Module
   - Dashboard Component
   - Portfolio Component
+    - Table
+    - Chart
+    - Cash 
   - Trading History Component
   - Trading Modal Component
   - Preferences Component
   - Robo Advisor Component
   - Reports Component
   - Profile Component
+    - Top Up Cash
   - Trader Navigation Component
 
   - Pipes and Utilities
@@ -23,8 +27,8 @@
 - Services
   - Auth Service (Register, Login, Logout, checkLoginStatus)
   - User Service (Fetch and Save User Data, Update User Data, Preferences)
-  - FMTS Service (Fetch Market Data, Execute Trades, Client Verification, /client)
-  - Portfolio Service (Fetch Portfolio Data, Trade History)
+  - FMTS Service (Fetch Market Data, Execute Trades, Client Verification)
+  - Portfolio Service (Fetch Portfolio Data, Trade History, Cash)
   - Mock Data API Service
 
 - Guards
