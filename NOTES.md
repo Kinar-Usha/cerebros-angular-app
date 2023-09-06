@@ -1,7 +1,7 @@
 ## Structure
 
-- Landing Page
-- Default Navigation
+- X Landing Page 
+- X Navbar
 - Login Component
 - Registration Component
 - Trader Module
@@ -17,7 +17,6 @@
   - Reports Component
   - Profile Component
     - Top Up Cash
-  - Trader Navigation Component
 
   - Pipes and Utilities
     - Search Pipe
@@ -32,7 +31,7 @@
   - Mock Data API Service
 
 - Guards
-  - Auth Guard (Protects Trader Module)
+  - X Auth Guard (Protects Trader Module)
 
 ## Flow
 
