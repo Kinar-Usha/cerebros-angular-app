@@ -6,16 +6,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { TraderComponent } from './trader/trader.component';
 
-
 @NgModule({
-  declarations: [
-    TraderComponent,
-    DashboardComponent,
-    PortfolioComponent,
-  ],
-  imports: [
-    CommonModule,
-    TraderRoutingModule
-  ]
+  declarations: [TraderComponent, DashboardComponent, PortfolioComponent],
+  imports: [CommonModule, TraderRoutingModule],
 })
-export class TraderModule { }
+export class TraderModule {}
