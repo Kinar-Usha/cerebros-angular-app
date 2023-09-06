@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-200 dark:bg-gray-900 text-gray-600 dark:text-gray-400;
+  }
+
+  h1 {
+    @apply text-5xl font-extrabold text-gray-700 dark:text-white;
+  }
+
+  h2 {
+    @apply text-4xl font-bold text-gray-700 dark:text-white;
+  }
+
+  h3 {
+    @apply text-3xl font-bold text-gray-700 dark:text-white;
+  }
+
+  h4 {
+    @apply text-2xl font-bold text-gray-700 dark:text-white;
+  }
+
+  h5 {
+    @apply text-xl font-bold text-gray-700 dark:text-white;
+  }
+
+  h6 {
+    @apply text-lg font-bold text-gray-700 dark:text-white;
+  }
+
+  button[variant="primary"] {
+    @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800;
+    /* disabled styles */
+    @apply disabled:bg-gray-300 disabled:text-gray-700 disabled:cursor-not-allowed disabled:hover:bg-gray-300 disabled:hover:text-gray-700 dark:disabled:bg-gray-700 dark:disabled:text-gray-400 dark:disabled:hover:bg-gray-700 dark:disabled:hover:text-gray-400;
+  }
+
+  button[variant="secondary"] {
+    /* @apply border-solid border-[1px] border-blue-400 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 hover:cursor-pointer disabled:cursor-not-allowed hover:text-white disabled:bg-white disabled:text-gray-700 transition-all duration-200 ease-in-out; */
+    @apply text-gray-900 border-solid border border-blue-400 dark:text-white bg-transparent hover:bg-blue-700 hover:text-white focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5  focus:outline-none dark:focus:ring-blue-800;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="date"] {
+    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
+  }
+
+  input[type="checkbox"] {
+    @apply w-4 h-4 border border-gray-300 rounded bg-gray-50 text-blue-500 focus:ring-2 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800;
+  }
+
+  label {
+    @apply block mb-2 text-sm font-medium text-gray-900 dark:text-white;
+  }
+
+  select {
+    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-cyan-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-blue-500;
+  }
+
+  .ng-valid[required],
+  .ng-valid.required {
+    @apply border-l-2 border-l-green-500;
+  }
+
+  .ng-invalid:not(form) {
+    @apply border-l-2 border-l-red-500;
+  }
+
+  table {
+    @apply w-full text-sm text-left text-gray-500 dark:text-gray-400;
+  }
+
+  thead {
+    @apply text-xs text-gray-700 uppercase bg-gray-50 border-b border-gray-300 dark:border-b-0 dark:bg-gray-700 dark:text-gray-400;
+  }
+
+  th {
+    @apply px-6 py-3;
+  }
+
+  tr {
+    @apply bg-white border-b dark:bg-gray-800 dark:border-gray-700;
+  }
+
+  td {
+    @apply px-6 py-3;
+  }
+}
+
+@layer components {
+  header {
+    @apply bg-white border-gray-200 dark:bg-gray-900 shadow-lg;
+    @apply border-b-0 dark:border-b dark:border-gray-700;
+    @apply flex justify-between items-center w-full p-2 shadow-md mb-4;
+    /* @apply fixed top-0 left-0 z-50; */
+  }
+
+  main {
+    @apply container mx-auto px-5 min-h-screen mb-8;
+  }
+
+  footer {
+    @apply bg-white dark:bg-gray-800 border-solid border-t dark:border-gray-700;
+    @apply w-full max-w-screen-xl mx-auto p-4 md:py-8;
+  }
+
+  footer .footer-text {
+    @apply block text-sm text-gray-500 sm:text-center dark:text-gray-400;
+  }
+
+  .card {
+    @apply w-full bg-white dark:bg-gray-800 shadow-lg rounded-md p-5 border-solid border border-gray-300 dark:border-gray-700;
+  }
+}
