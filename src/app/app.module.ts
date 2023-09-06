@@ -8,9 +8,10 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginComponent } from './login/login.component';
 import { TraderModule } from './trader/trader.module';
 import { TraderRoutingModule } from './trader/trader-routing.module';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
-  declarations: [AppComponent, LandingPageComponent, LoginComponent],
+  declarations: [AppComponent, LandingPageComponent, LoginComponent, PageNotFoundComponent],
   imports: [BrowserModule, AppRoutingModule, TraderRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
