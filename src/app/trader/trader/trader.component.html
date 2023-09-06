@@ -2,5 +2,7 @@
 <nav class="space-x-2">
   <a routerLink="./">Dashboard</a>
   <a routerLink="./portfolio">Portfolio</a>
+  <button variant="secondary" (click)="logout()">Logout</button>
 </nav>
+<a (click)="refreshMessage()">{{message}}</a>
 <router-outlet></router-outlet>

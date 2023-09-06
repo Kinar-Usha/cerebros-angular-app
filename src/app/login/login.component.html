@@ -1,3 +1,10 @@
 <p>login works!</p>
-<button variant="primary" routerLink="/trader">Trader</button>
+<button variant="secondary" routerLink="/trader">Trader</button>
 <button variant="secondary" routerLink="/">Home</button>
+
+<h2>Login</h2>
+<p>{{message}}</p>
+<p>
+  <button type="button" variant="primary" (click)="login()"  *ngIf="!authService.isLoggedIn">Login</button>
+  <button type="button" variant="primary" (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
+</p>
