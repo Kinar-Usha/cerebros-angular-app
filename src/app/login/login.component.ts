@@ -14,6 +14,12 @@ export class LoginComponent {
     this.message = this.getMessage();
   }
 
+  ngOnInit() {
+    if (this.authService.isLoggedIn) {
+      this.router.navigate(['/trader']);
+    }
+  }
+
   getMessage() {
     return 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out');
   }
