@@ -1,26 +1,59 @@
 import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
-import {tap, delay} from 'rxjs/operators';
+import { tap, delay, catchError } from 'rxjs/operators';
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
-  isLoggedIn = false;
+  // isLoggedIn: boolean = false;
+  // clientId: String | null = null;
 
   // store the URL so we can redirect after logging in
   redirectUrl: string | null = null;
 
-  login(): Observable<boolean> {
-    return of(true).pipe(
-      
-      tap(val => this.isLoggedIn = true)
+  constructor(private http: HttpClient) {}
+
+  login(email: string, password: string): Observable<Object> {
+    const url = 'http://localhost:8080/client/login';
+    const body = { email, password };
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http.post<Object>(url, body, { headers }).pipe(
+      tap((client: any) => {
+        // this.isLoggedIn = true;
+        // this.clientId = val.clientId;
+        sessionStorage.setItem('isLoggedIn', 'true');
+        sessionStorage.setItem('client', JSON.stringify(client));
+      }),
+      catchError((error) => {
+        if (error.status === 401) {
+          return of(false);
+        }
+        throw error;
+      })
     );
   }
 
   logout(): void {
-    this.isLoggedIn = false;
+    // this.isLoggedIn = false;
+    sessionStorage.removeItem('isLoggedIn');
+    sessionStorage.removeItem('client');
+  }
+
+  get isLoggedIn(): boolean {
+    return sessionStorage.getItem('isLoggedIn') === 'true';
+  }
+
+  get client(): Object | null {
+    const clientString = sessionStorage.getItem('client');
+    if (clientString) {
+      console.log(JSON.parse(clientString));
+      return JSON.parse(clientString);
+    }
+    return null;
   }
 }

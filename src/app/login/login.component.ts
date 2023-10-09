@@ -5,10 +5,13 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   message: string;
+  email: any;
+  password: any;
+  user: any;
 
   constructor(public authService: AuthService, public router: Router) {
     this.message = this.getMessage();
@@ -27,7 +30,7 @@ export class LoginComponent {
   login() {
     this.message = 'Trying to log in ...';
 
-    this.authService.login().subscribe(() => {
+    this.authService.login(this.email, this.password).subscribe(() => {
       this.message = this.getMessage();
       if (this.authService.isLoggedIn) {
         // Usually you would use the redirect URL from the auth service.
