@@ -1,1 +1,41 @@
-<p>portfolio works!</p>
+<h2 class="text-center text-4xl font-extrabold font-sans py-4">My Portfolio</h2>
+<div id="search-container" class="text-center py-4">
+    <input type="text" [(ngModel)]="filterTerm" id="searchbar" placeholder="Search..." class="form-control">
+</div>
+<!-- <div class="items-center justify-center"> -->
+<div class="flex justify-center">
+    <div class="text-center border-2 p-4  w-52 rounded-lg shadow-md my-5">
+        <h3 class="mb-2 text-xl">Total Holdings</h3>
+        <p class="text-lg font-bold">{{totalHoldings}}</p>
+        <h3 class="mt-4 mb-2 text-xl">Total Assets in holdings</h3>
+        <p class="text-lg font-bold">{{totalAssets}}</p>
+    </div>
+</div>
+<!-- </div> -->
+<div class="overflow-x-auto max-h-60">
+
+
+<table class="min-w-full bg-white shadow-md rounded-lg">
+    <thead class="sticky top-0">
+        <tr class="text-center">
+            <th class="py-2 px-4 bg-blue-700 text-white">Instrument ID</th>
+            <th class="py-2 px-4 bg-blue-700 text-white">Description</th>
+            <th class="py-2 px-4 bg-blue-700 text-white">Category</th>
+            <th class="py-2 px-4 bg-blue-700 text-white">Holdings</th>
+            <th class="py-2 px-4 bg-blue-700 text-white">Price</th>
+            <th class="py-2 px-4 bg-blue-700 text-white">Total Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of portfolio |tableFilter:filterTerm" class="'border-t text-black text-center" >
+            <td class="py-2 px-4  text-white">{{item.instrumentId}}</td>
+            <td class="py-2 px-4  text-white">{{item.description}}</td>
+            <td class="py-2 px-4  text-white">{{item.categoryId}}</td>
+            <td class="py-2 px-4  text-white">{{item.holdings}}</td>
+            <td class="py-2 px-4  text-white">{{item.price|currency}}</td>
+            <td class="py-2 px-4  text-white">{{item.holdings* item.price|currency}}</td>
+        
+        </tr>
+    </tbody>
+</table>
+</div>

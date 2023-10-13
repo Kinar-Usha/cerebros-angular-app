@@ -6,6 +6,8 @@ import { PortfolioComponent } from './portfolio/portfolio.component';
 import { authGuard } from '../auth/auth.guard';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 import { ProfileComponent } from './profile/profile.component';
+import { TradeHistoryComponent } from './trade-history/trade-history.component';
+import { TradeDialogComponent } from './trade-dialog/trade-dialog.component';
 
 const routes: Routes = [
   {
@@ -18,8 +20,11 @@ const routes: Routes = [
         canActivateChild: [authGuard],
         children: [
           { path: '', component: DashboardComponent },
+          {path: 'trade', component: TradeDialogComponent},
           { path: 'portfolio', component: PortfolioComponent },
+          {path:'tradeHistory', component:TradeHistoryComponent},
           {path: 'profile', component: ProfileComponent},
+
           {
             path: '**',
             component: PageNotFoundComponent,

@@ -1,1 +1,81 @@
-<p>dashboard works!</p>
+<div id="search-container" class="text-center py-4">
+  <input type="text" [(ngModel)]="filterTerm" id="searchbar" placeholder="Search eg. GOVT, JPMorgan"
+    class="form-control">
+</div>
+<div class="space-y-8">
+  <section class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Stock</th>
+          <th scope="col">Ask Price</th>
+          <th scope="col">Bid Price</th>
+          <th scope="col" class="text-center">Trade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stock of stocks|tableFilter:filterTerm">
+          <td>{{ stock.instrument.instrumentDescription }}</td>
+          <td>{{ stock.askPrice | currency }}</td>
+          <td>{{ stock.bidPrice | currency }}</td>
+          <td class="text-center">
+            <button class="buy-btn" (click)="openTradeModal(stock.instrument, stock.askPrice,'B')">
+              Buy
+            </button>
+            <button class="sell-btn" (click)="openTradeModal(stock.instrument, stock.bidPrice,'S')">
+              Sell
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">GOVT Bond</th>
+          <th scope="col">Ask Price</th>
+          <th scope="col">Bid Price</th>
+          <th scope="col" class="text-center">Trade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bond of bonds |tableFilter:filterTerm">
+          <td>{{ bond.instrument.instrumentDescription }}</td>
+          <td>{{ bond.askPrice | currency }}</td>
+          <td>{{ bond.bidPrice | currency }}</td>
+          <td class="text-center">
+            <button class="buy-btn" (click)="openTradeModal(bond.instrument, bond.askPrice,'B')">Buy</button>
+            <button class="sell-btn" (click)="openTradeModal(bond.instrument, bond.bidPrice,'S')">Sell</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Cash Deposit</th>
+          <th scope="col">Ask Price</th>
+          <th scope="col">Bid Price</th>
+          <th scope="col" class="text-center">Trade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cd of cds |tableFilter:filterTerm">
+          <td>{{ cd.instrument.instrumentDescription }}</td>
+          <td>{{ cd.askPrice | currency }}</td>
+          <td>{{ cd.bidPrice | currency }}</td>
+          <td class="text-center">
+            <button class="buy-btn" (click)="openTradeModal(cd.instrument, cd.askPrice, 'B')">Buy</button>
+            <button class="sell-btn" (click)="openTradeModal(cd.instrument, cd.bidPrice,'S')">Sell</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</div>

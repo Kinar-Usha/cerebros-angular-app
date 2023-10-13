@@ -6,9 +6,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { TraderComponent } from './trader/trader.component';
 import { ProfileComponent } from './profile/profile.component';
+import { TableFilterPipe } from '../pipes/table-filter.pipe';
+import { FormsModule } from '@angular/forms';
+import { TradeHistoryComponent } from './trade-history/trade-history.component';
+import { TradeDialogComponent } from './trade-dialog/trade-dialog.component';
+
 
 @NgModule({
-  declarations: [TraderComponent, DashboardComponent, PortfolioComponent, ProfileComponent],
-  imports: [CommonModule, TraderRoutingModule],
+  declarations: [TraderComponent, DashboardComponent, PortfolioComponent, ProfileComponent,TableFilterPipe, TradeHistoryComponent, TradeDialogComponent],
+  imports: [CommonModule, TraderRoutingModule,FormsModule],
 })
 export class TraderModule {}

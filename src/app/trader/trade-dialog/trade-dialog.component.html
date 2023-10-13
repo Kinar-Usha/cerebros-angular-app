@@ -1,0 +1,171 @@
+<!-- Buy modal -->
+<div *ngIf="selectedAction==='B'" id="buyModal" tabindex="-1" class=" ">
+    <div class="">
+        <!-- Modal content -->
+        <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+            <!-- Modal header -->
+            <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+                    <span>{{ selectedInstrument.instrumentDescription }}</span>
+                    <span class="buy-badge">Buy</span>
+                </h3>
+                <!-- <button id="closeBuyBtn" (click)="closeBuyBtn()" type="button"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    data-modal-hide="buyModal">
+<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+</svg>
+<span class="sr-only">Close modal</span>
+</button> -->
+            </div>
+            <!-- Modal body -->
+            <form>
+                <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                    <div>
+                        <label for="quantity">Quantity</label>
+
+
+
+                        <div class="flex justify-between items-center text-xs">
+                            <span> Min: {{ selectedInstrument.minQuantity }} </span>
+                            <span> Max: {{ selectedInstrument.maxQuantity }} </span>
+                        </div>
+                        <input id="quantity" name="quantity" type="number" value="1" step="1" required
+                            [(ngModel)]="selectedOrder.quantity" />
+                        <!-- TODO: use form validation here -->
+                        <div class="text-red-500 text-xs mt-1">
+                            <div *ngIf="selectedOrder.quantity < selectedInstrument.minQuantity">
+                                Quantity must be at least {{ selectedInstrument.minQuantity }}.
+                            </div>
+                            <div *ngIf="selectedOrder.quantity > selectedInstrument.maxQuantity">
+                                Quantity must be at most {{ selectedInstrument.maxQuantity }}.
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="price">Price</label>
+                        <div class="flex justify-between items-center text-xs">
+                            <span> Min: ${{ priceLimits[0] | number : ".4" }} </span>
+                            <span> Max: ${{ priceLimits[1] | number : ".4" }} </span>
+                        </div>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-2.5">
+                                $
+                            </span>
+                            <input id="price" name="price" type="number" variant="currency" step="0.01" class="pl-8"
+                                required [(ngModel)]="selectedOrder.targetPrice" />
+                            <!-- TODO: use form validation here -->
+                            <div class="text-red-500 text-xs mt-1">
+                                <div *ngIf="selectedOrder.targetPrice < priceLimits[0]">
+                                    Price must be at least ${{ priceLimits[0] | number : ".4" }}.
+                                </div>
+                                <div *ngIf="selectedOrder.targetPrice > priceLimits[1]">
+                                    Price must be at most ${{ priceLimits[1] | number : ".4" }}.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="buy-btn w-full" type="submit" (click)="placeOrder()">
+                    Execute Buy Order
+                </button>
+                <div class="mt-4 flex items-center">
+                    <span *ngIf="statusMessage" class="default-badge">
+                        Order Status:
+                    </span>
+                    <span class="text-sm">{{ statusMessage }}</span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- Sell modal -->
+<div *ngIf="selectedAction==='S'" id="sellModal" tabindex="-1"
+    class="">
+    <div class="">
+        <!-- Modal content -->
+        <div class="relative p-4 bg-black rounded-lg shadow dark:bg-gray-800 sm:p-5">
+            <!-- Modal header -->
+            <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+                    <span>{{ selectedInstrument.instrumentDescription }}</span>
+                    <span class="sell-badge">Sell</span>
+                </h3>
+                <!-- <button id="closeSellBtn" (click)="closeSellBtn()" type="button"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    data-modal-toggle="sellModal">
+<svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+</svg>
+<span class="sr-only">Close modal</span>
+</button> -->
+            </div>
+            <!-- Modal body -->
+            <form>
+                <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                    <div>
+                        <label for="quantity">Quantity</label>
+                        <!-- TODO: set max based on client's holdings -->
+                        <div class="flex justify-between items-center text-xs">
+                            <span> Min: {{ selectedInstrument.minQuantity }} </span>
+                            <span> Max: {{ selectedInstrument.maxQuantity }} </span>
+                        </div>
+                        <input id="quantity" name="quantity" type="number" value="1" step="1" required
+                            [(ngModel)]="selectedOrder.quantity" />
+                        <!-- TODO: use form validation here -->
+                        <div class="text-red-500 text-xs mt-1">
+                            <div *ngIf="selectedOrder.quantity < selectedInstrument.minQuantity">
+                                Quantity must be at least {{ selectedInstrument.minQuantity }}.
+                            </div>
+                            <div *ngIf="selectedOrder.quantity > selectedInstrument.maxQuantity">
+                                Quantity must be at most {{ selectedInstrument.maxQuantity }}.
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="price">Price</label>
+                        <div class="flex justify-between items-center text-xs">
+                            <span> Min: ${{ priceLimits[0] | number : ".4" }} </span>
+                            <span> Max: ${{ priceLimits[1] | number : ".4" }} </span>
+                        </div>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-2.5">
+                                $
+                            </span>
+                            <input id="price" name="price" type="number" variant="currency" step="0.01" class="pl-8"
+                                required [(ngModel)]="selectedOrder.targetPrice" />
+                            <!-- TODO: use form validation here -->
+                            <div class="text-red-500 text-xs mt-1">
+                                <div *ngIf="selectedOrder.targetPrice < priceLimits[0]">
+                                    Price must be at least ${{ priceLimits[0] | number : ".4" }}.
+                                </div>
+                                <div *ngIf="selectedOrder.targetPrice > priceLimits[1]">
+                                    Price must be at most ${{ priceLimits[1] | number : ".4" }}.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="sell-btn w-full" type="submit" (click)="placeOrder()">
+                    Execute Sell Order
+                </button>
+                <div class="mt-4 flex items-center">
+                    <span *ngIf="statusMessage" class="default-badge">
+                        Order Status:
+                    </span>
+                    <span class="text-sm">{{ statusMessage }}</span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

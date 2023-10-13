@@ -15,4 +15,5 @@ export interface Order{
     direction: string,
     clientId: string,
     instrumentId: string,
+    description?: string
 }
