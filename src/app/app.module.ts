@@ -11,11 +11,26 @@ import { TraderRoutingModule } from './trader/trader-routing.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegisterComponent } from './register/register.component';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+
 @NgModule({
-  declarations: [AppComponent, LandingPageComponent, LoginComponent, PageNotFoundComponent, NavbarComponent, RegisterComponent],
-  imports: [BrowserModule, AppRoutingModule, TraderRoutingModule,HttpClientModule],
+  declarations: [
+    AppComponent,
+    LandingPageComponent,
+    LoginComponent,
+    PageNotFoundComponent,
+    NavbarComponent,
+    RegisterComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    TraderRoutingModule,
+    FormsModule,
+    HttpClientModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

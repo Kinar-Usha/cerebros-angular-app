@@ -11,10 +11,14 @@ export class TraderComponent {
   currentYear = new Date().getFullYear();
 
   message: string;
+  client: any;
+  clientString: string;
 
 
   constructor(public authService: AuthService, public router: Router) {
     this.message = this.getMessage();
+    this.client = authService.client;
+    this.clientString = JSON.stringify(this.client);
   }
 
   getMessage() {
