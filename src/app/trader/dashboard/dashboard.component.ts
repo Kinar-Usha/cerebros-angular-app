@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { Instrument } from 'src/app/models/instrument.model';
 import { Price } from 'src/app/models/price.mode';
 import { TradeService } from 'src/app/services/trade.service';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,13 +11,12 @@ import {  Router } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  selectedAction: string="";
-  selectedPrice: number=0;
-  constructor(private tradeService:TradeService, private router:Router){}
-  filterTerm:any;
-  stocks:Price[]=[];
-  bonds:Price[]=[];
-  cds:Price[]=[];
+  selectedAction: string = "";
+  selectedPrice: number = 0;
+  filterTerm: any;
+  stocks: Price[] = [];
+  bonds: Price[] = [];
+  cds: Price[] = [];
   showTradeDialog: boolean = false;
 
   selectedInstrument: Instrument = {
@@ -29,6 +29,7 @@ export class DashboardComponent {
     minQuantity: 0,
   };
 
+  constructor(private tradeService: TradeService, private router: Router, private authService: AuthService) { }
 
   // order: any = {
   //   instrumentId: null,
@@ -39,31 +40,33 @@ export class DashboardComponent {
   //   clientId: ''
   // };
 
-  ngOnInit(){
-    // const clientId = sessionStorage.getItem('clientId');
-    // this.order.clientId=clientId;
-    this.tradeService.getPrices().subscribe((prices)=>{
+  ngOnInit() {
+    const client = this.authService.client;
+    console.log(client);
+
+
+    this.tradeService.getPrices().subscribe((prices) => {
       prices.forEach(price => {
         const category = price.instrument.categoryId;
-      
+
         if (category === "STOCK") {
           this.stocks.push(price);
-        } else if (category === "CD" ) {
+        } else if (category === "CD") {
           this.cds.push(price);
-        } else if( category === "GOVT") {
+        } else if (category === "GOVT") {
           this.bonds.push(price);
         }
       });
     })
   }
- 
+
   openTradeModal(selectedInstrument: Instrument, askPrice: number, action: string) {
     this.selectedInstrument = selectedInstrument;
-    this.selectedPrice= askPrice;
-    this.selectedAction=action;
+    this.selectedPrice = askPrice;
+    this.selectedAction = action;
     console.log(this.selectedInstrument);
     this.router.navigate(['/trader/trade'], {
-      state: { selectedInstrument, selectedAction: this.selectedAction, selectedPrice:askPrice },
+      state: { selectedInstrument, selectedAction: this.selectedAction, selectedPrice: askPrice },
     });
   }
 
@@ -81,6 +84,6 @@ export class DashboardComponent {
   //   //   button.click();
   //   // }
   // }
-  
+
 
 }

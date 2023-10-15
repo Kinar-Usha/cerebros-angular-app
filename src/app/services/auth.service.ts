@@ -15,7 +15,31 @@ export class AuthService {
   // store the URL so we can redirect after logging in
   redirectUrl: string | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
+
+  register(client: any): Observable<Object> {
+    const url = 'http://localhost:8080/client/register';
+    const body = client;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http.put<Object>(url, body, { headers }).pipe(
+      tap((val: any) => {
+        // this.isLoggedIn = true;
+        // this.clientId = val.clientId;
+        sessionStorage.setItem('isLoggedIn', 'true');
+        sessionStorage.setItem('client', JSON.stringify(client));
+        return val;
+      }),
+      catchError((error) => {
+        if (error.status === 400) {
+          return of("Invalid registration details");
+        }else if (error.status === 409) {
+          return of("User already exists");
+        }
+        throw error;
+      })
+    );
+  }
 
   login(email: string, password: string): Observable<Object> {
     const url = 'http://localhost:8080/client/login';
@@ -56,4 +80,6 @@ export class AuthService {
     }
     return null;
   }
+
+
 }
