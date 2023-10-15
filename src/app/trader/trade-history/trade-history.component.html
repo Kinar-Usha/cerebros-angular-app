@@ -2,32 +2,29 @@
 <div id="search-container" class="text-center py-4">
     <input type="text" [(ngModel)]="filterTerm" id="searchbar" placeholder="Search..." class="form-control">
 </div>
-<div class="overflow-x-auto max-h-60">
+<div class="overflow-x-auto max-h-85">
     <table class="min-w-full bg-white shadow-md rounded-lg">
         <thead class="sticky top-0">
             <tr class="text-center">
-                <th class="py-2 px-4 bg-blue-700 text-white">Instrument ID</th>
-                <th class="py-2 px-4 bg-blue-700 text-white">Description</th>
-                <!-- <th class="py-2 px-4 bg-blue-700 text-white">Category</th> -->
+                <th>Instrument ID</th>
+                <th>Description</th>
+                <!-- <th class="py-3 px-4 bg-blue-700 text-white">Category</th> -->
 
 
-                <th class="py-2 px-4 bg-blue-700 text-white">tradeId</th>
-                <th class="py-2 px-4 bg-blue-700 text-white">direction</th>
-                <th class="py-2 px-4 bg-blue-700 text-white">executionPrice</th>
-                <th class="py-2 px-4 bg-blue-700 text-white">quantity</th>
-                <th class="py-2 px-4 bg-blue-700 text-white">cash value</th>
+                <th>direction</th>
+                <th>executionPrice</th>
+                <th>quantity</th>
+                <th>cash value</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let trade of trades.reverse()|tableFilter:filterTerm" class="'border-t text-black text-center" >
-                <td class="py-2 px-4 text-white">{{trade.instrumentId}}</td>
-                <td class="py-2 px-4 text-white">{{trade.description}}</td>
-                <td class="py-2 px-4 text-white">{{trade.tradeId}}</td>
-                <td class="py-2 px-4 text-white">{{trade.direction}}</td>
-                <td class="py-2 px-4 text-white">{{trade.executionPrice|currency}}</td>
-                <td class="py-2 px-4 text-white">{{trade.quantity}}</td>
-                <td class="py-2 px-4 text-white">{{trade.cashValue|currency}}</td>
-            
+            <tr *ngFor="let trade of trades.reverse()|tableFilter:filterTerm" class="'border-t text-black text-center">
+                <td>{{trade.instrumentId}}</td>
+                <td>{{trade.description}}</td>
+                <td>{{trade.direction}}</td>
+                <td>{{trade.executionPrice|currency}}</td>
+                <td>{{trade.quantity}}</td>
+                <td>{{trade.cashValue|currency}}</td>
             </tr>
         </tbody>
     </table>

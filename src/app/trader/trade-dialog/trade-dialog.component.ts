@@ -16,12 +16,23 @@ export class TradeDialogComponent implements OnInit {
       this.selectedInstrument = extras['selectedInstrument'];
       this.selectedAction = extras['selectedAction'];
       this.selectedPrice = extras['selectedPrice'];
-      console.log(this.selectedInstrument)
-      this.selectedOrder.clientId = sessionStorage.getItem('clientId') || '';
+      this.selectedOrder.direction = this.selectedAction;
+
+      if (this.selectedAction == "S") {
+        this.priceLimits = [this.selectedPrice * 0.99, this.selectedPrice];
+      }
+      else {
+
+        this.priceLimits = [this.selectedPrice, this.selectedPrice * 1.01];
+      }
+
+      const client = sessionStorage.getItem('client');
+      const clientId = client ? JSON.parse(client).clientId : null;
+
+      this.selectedOrder.clientId = clientId;
       this.selectedOrder.instrumentId = this.selectedInstrument.instrumentId;
       this.selectedOrder.quantity = this.quantity;
       this.selectedOrder.targetPrice = this.selectedPrice;
-      this.selectedOrder.direction = this.selectedAction;
     }
   }
   ngOnInit(): void {
@@ -57,14 +68,13 @@ export class TradeDialogComponent implements OnInit {
     this.tradeService.placeOrder(this.selectedOrder).subscribe(data => {
       //check if status code is not 409
       console.log(data);
-      if (data.status != 409) {
 
-        this.statusMessage = 'Placed Order';
-      }
-      else {
-        this.statusMessage = 'Not enough holdings';
-      }
-    })
+      this.statusMessage = 'Placed Order';
+    },
+      error => {
+        console.log(error);
+        this.statusMessage = error;
+      });
 
 
   }

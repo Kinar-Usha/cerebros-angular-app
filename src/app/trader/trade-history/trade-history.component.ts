@@ -18,7 +18,8 @@ export class TradeHistoryComponent implements OnInit {
 
   }
   loadTradeHistory() {
-    const clientId = sessionStorage.getItem('clientId');
+    const client = sessionStorage.getItem('client');
+    const clientId = client ? JSON.parse(client).clientId : null;
     if (clientId) {
       this.tradeService.getTradeHistory(clientId).subscribe(data => {
         //sort trades based on tradeid,tradeid is string convert it to number to sort it.

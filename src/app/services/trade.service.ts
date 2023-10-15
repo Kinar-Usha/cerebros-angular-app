@@ -31,10 +31,10 @@ export class TradeService {
     return this.http.post<any>(this.tradeUrl, order, { headers }).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 409) {
-
-          alert('Not enough holdings');
-
-          console.error('Conflict error:', error);
+          throw new Error(error.error);
+        }
+        if (error.status === 406) {
+          throw new Error(error.error);
         }
         // You can rethrow the error or handle other status codes as needed
         return throwError(error);
