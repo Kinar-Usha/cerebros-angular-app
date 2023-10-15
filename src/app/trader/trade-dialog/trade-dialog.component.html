@@ -68,8 +68,10 @@
                         </div>
                     </div>
                 </div>
-                <button class="buy-btn w-full" type="submit" (click)="placeOrder()">
-                    Execute Buy Order
+                <button class="buy-btn w-full" type="submit"
+                    [disabled]="selectedOrder.quantity < selectedInstrument.minQuantity || selectedOrder.quantity > selectedInstrument.maxQuantity"
+                    (click)="placeOrder()">
+                    Execute Order
                 </button>
                 <div class="mt-4 flex items-center">
                     <span *ngIf="statusMessage" class="default-badge">
@@ -87,8 +89,7 @@
 
 
 <!-- Sell modal -->
-<div *ngIf="selectedAction==='S'" id="sellModal" tabindex="-1"
-    class="">
+<div *ngIf="selectedAction==='S'" id="sellModal" tabindex="-1" class="">
     <div class="">
         <!-- Modal content -->
         <div class="relative p-4 bg-black rounded-lg shadow dark:bg-gray-800 sm:p-5">
