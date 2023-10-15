@@ -117,21 +117,7 @@ export class AuthService {
     return null;
   }
 
-  getCashBalance(clientId: string): Observable<Object> {
-    const url = `${this.baseUrl}/cash/${clientId}`;
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    return this.http.get<Object>(url, { headers }).pipe(
-      tap((val: any) => {
-        if (val) {
-          let cash = val.cashRemaining;
-          console.log(cash);
-          return cash;
-        }
-        return 0;
-      })
-    );
-  }
 
 
 

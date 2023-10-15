@@ -37,10 +37,17 @@
   <nav *ngIf="authService.isLoggedIn" class="flex items-center gap-5">
     <div
       class="link"
+      [attr.aria-current]="router.url === '/trader' ? 'page' : null"
+      routerLink="/trader"
+    >
+      Trade
+    </div>
+    <div
+      class="link"
       [attr.aria-current]="router.url === '/trader/tradeHistory' ? 'page' : null"
       routerLink="/trader/tradeHistory"
     >
-      Trade History
+      History
     </div>
     <div
       class="link"

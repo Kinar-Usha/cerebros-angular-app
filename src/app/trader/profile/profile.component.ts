@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Client } from 'src/app/models/client';
 import { Preferences } from 'src/app/models/preferences';
 import { AuthService } from 'src/app/services/auth.service';
+import { PortfolioService } from 'src/app/services/portfolio.service';
 
 @Component({
   selector: 'app-profile',
@@ -25,17 +26,16 @@ export class ProfileComponent {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private portfolioService: PortfolioService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    if (this.client)
-      this.authService.getCashBalance(this.client.clientId).subscribe((cash: any) => {
-        console.log(cash);
-        if (cash != null) {
-          this.cash = cash.cashRemaining;
-        }
-      })
+    if (this.client) {
+      this.portfolioService.getCash(this.client.clientId).subscribe(cash => {
+        this.cash = cash ? (cash).cashRemaining : 0;
+      });
+    }
 
     this.prefForm = this.formBuilder.group({
       purpose: ['', Validators.required],
