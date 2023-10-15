@@ -13,6 +13,10 @@
   - Trading History Component
   - Trading Modal Component
   - Preferences Component
+  - Wallet Component
+    - Top Up Cash
+    - Withdraw Cash
+    - Mock Payment Gateway
   - Robo Advisor Component
   - Reports Component
   - Profile Component
@@ -28,7 +32,7 @@
   - User Service (Fetch and Save User Data, Update User Data, Preferences)
   - FMTS Service (Fetch Market Data, Execute Trades, Client Verification)
   - Portfolio Service (Fetch Portfolio Data, Trade History, Cash)
-  - Mock Data API Service
+  - 
 
 - Guards
   - X Auth Guard (Protects Trader Module)
@@ -44,9 +48,11 @@
          1. If yes, redirect to login
          2. If no, continue
       2. Use FMTS to get Client ID and Token
-      3. User Service stores Client ID and Token in Local Storage (and Mock Data*)
+      3. User Service stores Client ID and Token in Local Storage
       4. User is told to use identification as their password
-   3. Redirect user to login page
+   3. Redirect user to login page (not necessary just log them in)
+   4. On first login, redirect to preferences page
+   5. Allow them to connect their bank account
 4. User logs in
    1. User enters email and identification
    2. If preferences are not set, redirect to preferences
