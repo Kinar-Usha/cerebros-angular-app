@@ -33,7 +33,7 @@ export class ProfileComponent {
       this.authService.getCashBalance(this.client.clientId).subscribe((cash: any) => {
         console.log(cash);
         if (cash != null) {
-          this.cash = cash;
+          this.cash = cash.cashRemaining;
         }
       })
 

@@ -123,7 +123,6 @@ export class AuthService {
 
     return this.http.get<Object>(url, { headers }).pipe(
       tap((val: any) => {
-        console.log(val.cashRemaining);
         if (val) {
           let cash = val.cashRemaining;
           console.log(cash);
