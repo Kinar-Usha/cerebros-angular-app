@@ -21,7 +21,7 @@ export class PortfolioComponent implements OnInit {
   calculateHoldingsAndAssets() {
     const uniqueAssets = new Set<string>();
     this.portfolio.forEach(asset => {
-      this.totalHoldings += asset.holdings;
+      this.totalHoldings += asset.price * asset.holdings;
       uniqueAssets.add(asset.instrumentId)
     })
     this.totalAssets = uniqueAssets.size

@@ -1,19 +1,29 @@
 <h2 class="text-center text-4xl font-extrabold font-sans py-4">My Portfolio</h2>
 
-<div id="search-container" class="text-center py-4">
-    <input type="text" [(ngModel)]="filterTerm" id="searchbar" placeholder="Search..." class="form-control">
-</div>
+
 <!-- <div class="items-center justify-center"> -->
 <div class="flex justify-center">
     <div class="text-center border-2 p-4 w-96 rounded-lg shadow-md my-5">
-        <h3 class="mb-2 text-xl">Total Holdings</h3>
-        <p class="text-lg font-bold">{{totalHoldings}}</p>
-        <h3 class="mt-4 mb-2 text-xl">Total Assets in holdings</h3>
-        <p class="text-lg font-bold">{{totalAssets}}</p>
-        <h3 class="mt-4 mb-2 text-xl">Cash in Account</h3>
-        <p class="text-lg font-bold">{{cash}}</p>
+        <div class="flex justify-between">
+            <div class="mr-4"> <!-- Add margin-right to the first div -->
+                <h3 class="mb-2 text-xl">Total Holdings</h3>
+                <p class="text-lg font-bold">{{totalHoldings}}</p>
+            </div>
+            <div class="mx-4"> <!-- Add margin on both sides to the second div -->
+                <h3 class="mb-2 text-xl">Total Assets</h3>
+                <p class="text-lg font-bold">{{totalAssets}}</p>
+            </div>
+            <div class="ml-4"> <!-- Add margin-left to the third div -->
+                <h3 class="mb-2 text-xl">Cash in Account</h3>
+                <p class="text-lg font-bold mt-1">{{cash}}</p>
+            </div>
+        </div>
     </div>
 </div>
+<div id="search-container" class="text-center py-4">
+    <input type="text" [(ngModel)]="filterTerm" id="searchbar" placeholder="Search..." class="form-control">
+</div>
+
 <!-- </div> -->
 <div class="overflow-x-auto max-h-90">
 
