@@ -16,8 +16,10 @@ export class TradeDialogComponent implements OnInit {
       this.selectedInstrument = extras['selectedInstrument'];
       this.selectedAction = extras['selectedAction'];
       this.selectedPrice = extras['selectedPrice'];
-      console.log(this.selectedInstrument)
-      this.selectedOrder.clientId = sessionStorage.getItem('clientId') || '';
+      const client = sessionStorage.getItem('client');
+      const clientId = client ? JSON.parse(client).clientId : null;
+
+      this.selectedOrder.clientId = clientId;
       this.selectedOrder.instrumentId = this.selectedInstrument.instrumentId;
       this.selectedOrder.quantity = this.quantity;
       this.selectedOrder.targetPrice = this.selectedPrice;

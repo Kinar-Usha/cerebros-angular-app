@@ -7,14 +7,20 @@ import { Portfolio } from '../models/portfolio.model';
   providedIn: 'root'
 })
 export class PortfolioService {
-  
+
 
   private baseUrl = 'http://localhost:8080/portfolio/';
+  private cashUrl = 'http://localhost:8080/';
 
-  constructor(private http: HttpClient) {}
+
+  constructor(private http: HttpClient) { }
 
   getPortfolio(clientId: string): Observable<Portfolio[]> {
-    const url = `${this.baseUrl}${clientId}`; 
+    const url = `${this.baseUrl}${clientId}`;
     return this.http.get<Portfolio[]>(url);
+  }
+  getCash(clientId: string): Observable<any> {
+    const url = `${this.cashUrl}cash/${clientId}`;
+    return this.http.get<any>(url);
   }
 }
