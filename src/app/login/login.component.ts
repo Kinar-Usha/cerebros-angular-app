@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   message: string;
+  error: any;
   email: any;
   password: any;
   user: any;
@@ -39,6 +40,8 @@ export class LoginComponent {
 
         // Redirect the user
         this.router.navigate([redirectUrl]);
+      } else {
+        this.error = 'Invalid email or password';
       }
     });
   }

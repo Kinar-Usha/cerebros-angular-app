@@ -26,14 +26,18 @@ export class AuthService {
       tap((val: any) => {
         // this.isLoggedIn = true;
         // this.clientId = val.clientId;
-        sessionStorage.setItem('isLoggedIn', 'true');
-        sessionStorage.setItem('client', JSON.stringify(client));
+        this.getClient(client.person.email).subscribe((client) => {
+          console.log("Registered",client);
+          sessionStorage.setItem('isLoggedIn', 'true');
+          sessionStorage.setItem('client', JSON.stringify(client));
+        })
+
         return val;
       }),
       catchError((error) => {
         if (error.status === 400) {
           return of("Invalid registration details");
-        }else if (error.status === 409) {
+        } else if (error.status === 409) {
           return of("User already exists");
         }
         throw error;
@@ -70,6 +74,27 @@ export class AuthService {
 
   get isLoggedIn(): boolean {
     return sessionStorage.getItem('isLoggedIn') === 'true';
+  }
+
+  getClient(email: string): Observable<Object> {
+    const url = `http://localhost:8080/client/email/${email}`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http.get<Object>(url, { headers }).pipe(
+      tap((client: any) => {
+        console.log(client);
+        // this.isLoggedIn = true;
+        // this.clientId = val.clientId;
+        sessionStorage.setItem('isLoggedIn', 'true');
+        sessionStorage.setItem('client', JSON.stringify(client));
+      }),
+      catchError((error) => {
+        if (error.status === 401) {
+          return of(false);
+        }
+        throw error;
+      })
+    );
   }
 
   get client(): Object | null {
