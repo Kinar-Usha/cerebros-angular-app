@@ -18,4 +18,4 @@ import { RoboadvisorComponent } from './roboadvisor/roboadvisor.component';
   declarations: [TraderComponent, DashboardComponent, PortfolioComponent, ProfileComponent, TableFilterPipe, IdMaskPipe, TradeHistoryComponent, TradeDialogComponent, RoboadvisorComponent],
   imports: [CommonModule, TraderRoutingModule, FormsModule, ReactiveFormsModule],
 })
-export class TraderModule {}
+export class TraderModule { }
