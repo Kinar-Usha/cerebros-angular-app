@@ -159,12 +159,13 @@ export class AuthService {
         return throwError(error);
       })
     );
+    sessionStorage.setItem('preferences', JSON.stringify(preferences));
   }
 
 
 
 
- 
+
 
 
 

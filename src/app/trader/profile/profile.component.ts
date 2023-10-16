@@ -39,6 +39,15 @@ export class ProfileComponent {
   ngOnInit() {
     console.log(this.client);
     this.client = this.authService.client;
+    this.prefForm = this.formBuilder.group({
+      purpose: ['', Validators.required],
+      risk: ['', Validators.required],
+      time: ['', Validators.required],
+      income: ['', Validators.required],
+      agreeTerms: [false, Validators.requiredTrue],
+    });
+    // get prefereces from sessionStorage
+
     if (this.client) {
 
       this.portfolioService.getCash(this.client.clientId).subscribe(cash => {
@@ -46,7 +55,34 @@ export class ProfileComponent {
         console.log(this.cash);
         console.log("cash");
       });
+      console.log(this.client.preferences);
+      const prefs = sessionStorage.getItem(this.client.clientId + 'preferences');
 
+      if (prefs) {
+        const parsedPrefs = JSON.parse(prefs); // parse the string into an object
+        this.prefForm.setValue({
+          purpose: parsedPrefs.purpose,
+          risk: parsedPrefs.risk,
+          time: parsedPrefs.time,
+          income: parsedPrefs.income,
+          agreeTerms:false,
+        });
+      }
+      else {
+        this.authService.getPreferences(this.client.clientId).subscribe((data) => {
+          console.log(data);
+          this.prefForm.setValue({
+            purpose: data.purpose,
+            risk: data.risk,
+            time: data.time,
+            income: data.income,
+            agreeTerms: false,
+          });
+          sessionStorage.setItem(this.client?.clientId+'preferences', JSON.stringify(data));
+        });
+
+
+      }
 
     }
     else {
@@ -57,13 +93,7 @@ export class ProfileComponent {
       }, 500);
     }
 
-    this.prefForm = this.formBuilder.group({
-      purpose: ['', Validators.required],
-      risk: ['', Validators.required],
-      time: ['', Validators.required],
-      income: ['', Validators.required],
-      agreeTerms: [false, Validators.requiredTrue],
-    });
+   
   }
 
   updateCashBalance() {
