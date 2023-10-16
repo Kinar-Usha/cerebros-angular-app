@@ -1,53 +1,89 @@
-<h2 class="mb-4">My <span
-        class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-rose-600">Portfolio</span></h2>
+<h2 class="mb-4">
+  My
+  <span
+    class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-rose-600"
+    >Portfolio</span
+  >
+</h2>
 
-<section class="flex items-center justify-between gap-4">
+<section>
+  <div class="my-4">
+    <div class="flex">
+      <div
+        class="bg-gradient-to-r from-purple-600 to-rose-400 h-5 rounded-l-full"
+        [style.width]="(totalHoldings / (totalHoldings + cash)) * 100 + '%'"
+      ></div>
+      <div
+        class="bg-gradient-to-r from-emerald-600 to-green-400 h-5 rounded-r-full"
+        [style.width]="(cash / (totalHoldings + cash)) * 100 + '%'"
+      ></div>
+    </div>
+  </div>
 
+  <div class="flex items-center justify-between gap-4">
     <div class="card">
-        <p class="mb-2 text-md font-medium text-gray-700 dark:text-gray-300">Portfolio Value</p>
-        <p class="text-3xl font-bold">{{ totalHoldings | currency }}</p>
+      <div class="mb-2 flex items-center gap-2">
+        <p class="text-md font-medium text-gray-700 dark:text-gray-300">
+          Portfolio Value
+        </p>
+        <div class="w-4 h-4 rounded-full bg-gradient-to-r from-purple-600 to-rose-400"></div>
+      </div>
+      <p class="text-3xl font-bold">{{ totalHoldings | currency }}</p>
     </div>
 
     <div class="card">
-        <p class="mb-2 text-md font-medium text-gray-700 dark:text-gray-300">Total Assets</p>
-        <p class="text-3xl font-bold">{{ totalAssets | number }}</p>
+      <div class="mb-2 flex items-center gap-2">
+        <p class="text-md font-medium text-gray-700 dark:text-gray-300">
+          Available Cash
+        </p>
+        <div class="w-4 h-4 rounded-full bg-gradient-to-r from-emerald-600 to-green-400"></div>
+      </div>
+      <p class="text-3xl font-bold">{{ cash | currency }}</p>
     </div>
 
     <div class="card">
-        <p class="mb-2 text-md font-medium text-gray-700 dark:text-gray-300">Available Cash</p>
-        <p class="text-3xl font-bold">{{ cash | currency }}</p>
+      <p class="mb-2 text-md font-medium text-gray-700 dark:text-gray-300">
+        Total Assets
+      </p>
+      <p class="text-3xl font-bold">{{ totalAssets | number }}</p>
     </div>
-
+  </div>
 </section>
 
-
-
 <div id="search-container" class="text-center py-4">
-    <input type="text" [(ngModel)]="filterTerm" id="searchbar" placeholder="Search..." class="form-control">
+  <input
+    type="text"
+    [(ngModel)]="filterTerm"
+    id="searchbar"
+    placeholder="Search..."
+    class="form-control"
+  />
 </div>
 
-<div class="relative overflow-x-auto shadow-md sm:rounded-md overflow-y-auto max-h-90">
-    <table>
-        <thead class="sticky top-0">
-            <th>Instrument ID</th>
-            <th>Description</th>
-            <th>Category</th>
-            <th>Holdings</th>
-            <th>Price</th>
-            <th>Total Value</th>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of portfolio |tableFilter:filterTerm">
-                <td>{{item.instrumentId}}</td>
-                <td>{{item.description}}</td>
-                <td>{{item.categoryId}}</td>
-                <td>{{item.holdings}}</td>
-                <td>{{item.price|currency}}</td>
-                <td>{{item.holdings* item.price|currency}}</td>
-            </tr>
-            <tr *ngIf="(portfolio | tableFilter:filterTerm).length === 0">
-                <td colspan="6" class="text-center">No Data Available</td>
-            </tr>
-        </tbody>
-    </table>
+<div
+  class="relative overflow-x-auto shadow-md sm:rounded-md overflow-y-auto max-h-90"
+>
+  <table>
+    <thead class="sticky top-0">
+      <th>Instrument ID</th>
+      <th>Description</th>
+      <th>Category</th>
+      <th>Holdings</th>
+      <th>Price</th>
+      <th>Total Value</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of portfolio | tableFilter : filterTerm">
+        <td>{{ item.instrumentId }}</td>
+        <td>{{ item.description }}</td>
+        <td>{{ item.categoryId }}</td>
+        <td>{{ item.holdings }}</td>
+        <td>{{ item.price | currency }}</td>
+        <td>{{ item.holdings * item.price | currency }}</td>
+      </tr>
+      <tr *ngIf="(portfolio | tableFilter : filterTerm).length === 0">
+        <td colspan="6" class="text-center">No Data Available</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
