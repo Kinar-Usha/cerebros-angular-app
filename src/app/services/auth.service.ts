@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { tap, delay, catchError } from 'rxjs/operators';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Client } from '../models/client';
+import { Preferences } from '../models/preferences';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,7 @@ export class AuthService {
   // store the URL so we can redirect after logging in
   redirectUrl: string | null = null;
   baseUrl: string = 'http://localhost:8082';
+  backendUrl: string = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
 
@@ -103,6 +105,8 @@ export class AuthService {
 
   get client(): Client | null {
     const clientString = sessionStorage.getItem('client');
+    console.log(sessionStorage.getItem('client'));
+    console.log("in get client")
 
     if (clientString) {
       let clientJson = JSON.parse(clientString);
@@ -116,6 +120,51 @@ export class AuthService {
     }
     return null;
   }
+
+
+  // getPreferences(clientId: string): Observable<Preferences> {
+  //   const url = `${this.baseUrl}/client/preferences/${clientId}`;
+  //   return this.http.get<Preferences>(url).pipe(
+  //     catchError((error: HttpErrorResponse) => {
+  //       if (error.status === 500) {
+  //         // console.log("error here");
+  //         throw new Error(error.error);
+  //       }
+  //       if (error.status === 406) {
+  //         throw new Error(error.error);
+  //       }
+  //       // You can rethrow the error or handle other status codes as needed
+  //       return throwError(error);
+  //     })
+  //   );
+  // }
+
+
+
+  savePreferences(clientId: string, preferences: Preferences) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json', // Set the content type as needed
+      // Add any other headers if required
+    });
+    const url = `${this.baseUrl}/client/add/preferences/${clientId}`;
+    return this.http.post<any>(url, preferences, { headers }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 409) {
+          throw new Error(error.error);
+        }
+        if (error.status === 406) {
+          throw new Error(error.error);
+        }
+        // You can rethrow the error or handle other status codes as needed
+        return throwError(error);
+      })
+    );
+  }
+
+
+
+
+ 
 
 
 
