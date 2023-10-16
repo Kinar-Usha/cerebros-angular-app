@@ -32,13 +32,24 @@ export class ProfileComponent {
   ) { }
 
   ngOnInit() {
+    console.log(this.client);
+    this.client = this.authService.client;
     if (this.client) {
     
       this.portfolioService.getCash(this.client.clientId).subscribe(cash => {
         this.cash = cash ? (cash).cashRemaining : 0;
+        console.log(this.cash);
+        console.log("cash");
       });
 
  
+    }
+    else {
+      //TODO a better way to do this
+
+      setTimeout(() => {
+        this.ngOnInit();
+      }, 500);
     }
 
     this.prefForm = this.formBuilder.group({

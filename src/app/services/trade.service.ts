@@ -10,9 +10,9 @@ import { Price } from '../models/price.mode';
 export class TradeService {
 
 
-  private baseUrl = 'http://localhost:8080/tradehistory/';
-  private pricesUrl = 'http://localhost:8080/prices'
-  private tradeUrl = 'http://localhost:8080/trade'
+  private baseUrl = 'http://localhost:8082/tradehistory/';
+  private pricesUrl = 'http://localhost:8082/prices'
+  private tradeUrl = 'http://localhost:8082/trade'
   constructor(private http: HttpClient) { }
 
   getTradeHistory(clientId: string): Observable<Trade[]> {

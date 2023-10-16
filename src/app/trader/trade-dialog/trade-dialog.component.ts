@@ -10,6 +10,7 @@ import { TradeService } from 'src/app/services/trade.service';
   styleUrls: ['./trade-dialog.component.css']
 })
 export class TradeDialogComponent implements OnInit {
+
   constructor(private tradeService: TradeService, private router: Router, private route: ActivatedRoute) {
     const extras = this.router.getCurrentNavigation()?.extras.state;
     if (extras) {
@@ -33,8 +34,11 @@ export class TradeDialogComponent implements OnInit {
       this.selectedOrder.instrumentId = this.selectedInstrument.instrumentId;
       this.selectedOrder.quantity = this.quantity;
       this.selectedOrder.targetPrice = this.selectedPrice;
+    } else {
+      this.router.navigate(['../'], { relativeTo: this.route });
     }
   }
+
   ngOnInit(): void {
 
   }
@@ -70,6 +74,10 @@ export class TradeDialogComponent implements OnInit {
       console.log(data);
 
       this.statusMessage = 'Placed Order';
+
+      setTimeout(() => {
+        this.router.navigate(['/trader/portfolio']);
+      }, 1000);
     },
       error => {
         console.log(error);

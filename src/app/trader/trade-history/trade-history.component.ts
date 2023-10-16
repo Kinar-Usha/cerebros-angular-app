@@ -23,7 +23,10 @@ export class TradeHistoryComponent implements OnInit {
     if (clientId) {
       this.tradeService.getTradeHistory(clientId).subscribe(data => {
         //sort trades based on tradeid,tradeid is string convert it to number to sort it.
-
+        console.log(data)
+        if (data == null) {
+          data = [];
+        }
         this.trades = data;
         this.trades = this.trades.sort((a, b) => {
           // Convert tradeId to numbers for comparison

@@ -9,8 +9,8 @@ import { Portfolio } from '../models/portfolio.model';
 export class PortfolioService {
 
 
-  private baseUrl = 'http://localhost:8080/portfolio/';
-  private cashUrl = 'http://localhost:8080/';
+  private baseUrl = 'http://localhost:8082/portfolio/';
+  private cashUrl = 'http://localhost:8082/';
 
 
   constructor(private http: HttpClient) { }
