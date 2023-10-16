@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Portfolio } from 'src/app/models/portfolio.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { PortfolioService } from 'src/app/services/portfolio.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class PortfolioComponent implements OnInit {
   totalHoldings: number = 0;
   totalAssets: number = 0
   public portfolio: Portfolio[] = []
-  constructor(private portfolioService: PortfolioService) { }
+  constructor(private portfolioService: PortfolioService, private authService: AuthService) { }
   ngOnInit(): void {
     this.loadPortfolio();
 
@@ -28,17 +29,15 @@ export class PortfolioComponent implements OnInit {
   }
 
   loadPortfolio() {
-    const client = sessionStorage.getItem('client');
-    const clientId = client ? JSON.parse(client).clientId : null;
+    const client = this.authService.client;
+    const clientId = client ? client.clientId : null;
     if (clientId) {
       this.portfolioService.getPortfolio(clientId).subscribe(portfolio => {
         this.portfolio = portfolio;
         this.calculateHoldingsAndAssets();
       });
       this.portfolioService.getCash(clientId).subscribe(cash => {
-
         this.cash = cash ? (cash).cashRemaining : 0;
-
       });
     } else {
       console.error('clientId not found in session storage');

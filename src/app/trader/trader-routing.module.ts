@@ -8,6 +8,7 @@ import { PageNotFoundComponent } from '../page-not-found/page-not-found.componen
 import { ProfileComponent } from './profile/profile.component';
 import { TradeHistoryComponent } from './trade-history/trade-history.component';
 import { TradeDialogComponent } from './trade-dialog/trade-dialog.component';
+import { RoboadvisorComponent } from './roboadvisor/roboadvisor.component';
 
 const routes: Routes = [
   {
@@ -20,11 +21,11 @@ const routes: Routes = [
         canActivateChild: [authGuard],
         children: [
           { path: '', component: DashboardComponent },
-          {path: 'trade', component: TradeDialogComponent},
+          { path: 'trade', component: TradeDialogComponent },
           { path: 'portfolio', component: PortfolioComponent },
-          {path:'tradeHistory', component:TradeHistoryComponent},
-          {path: 'profile', component: ProfileComponent},
-
+          { path: 'tradeHistory', component: TradeHistoryComponent },
+          { path: 'profile', component: ProfileComponent },
+          { path: 'roboadvisor', component: RoboadvisorComponent },
           {
             path: '**',
             component: PageNotFoundComponent,
@@ -39,4 +40,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class TraderRoutingModule {}
+export class TraderRoutingModule { }

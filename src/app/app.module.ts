@@ -13,6 +13,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { IdMaskPipe } from './pipes/id-mask.pipe';
 
 
 @NgModule({
