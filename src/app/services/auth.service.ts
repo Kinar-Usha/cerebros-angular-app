@@ -122,22 +122,22 @@ export class AuthService {
   }
 
 
-  // getPreferences(clientId: string): Observable<Preferences> {
-  //   const url = `${this.baseUrl}/client/preferences/${clientId}`;
-  //   return this.http.get<Preferences>(url).pipe(
-  //     catchError((error: HttpErrorResponse) => {
-  //       if (error.status === 500) {
-  //         // console.log("error here");
-  //         throw new Error(error.error);
-  //       }
-  //       if (error.status === 406) {
-  //         throw new Error(error.error);
-  //       }
-  //       // You can rethrow the error or handle other status codes as needed
-  //       return throwError(error);
-  //     })
-  //   );
-  // }
+  getPreferences(clientId: string): Observable<Preferences> {
+    const url = `${this.baseUrl}/client/preferences/${clientId}`;
+    return this.http.get<Preferences>(url).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 500) {
+          // console.log("error here");
+          throw new Error(error.error);
+        }
+        if (error.status === 406) {
+          throw new Error(error.error);
+        }
+        // You can rethrow the error or handle other status codes as needed
+        return throwError(error);
+      })
+    );
+  }
 
 
 

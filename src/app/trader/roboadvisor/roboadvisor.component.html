@@ -16,7 +16,7 @@
         <th scope="col" class="text-center">Trade</th>
       </thead>
       <tbody>
-        <tr *ngFor="let stock of stocks | tableFilter : filterTerm">
+        <tr *ngFor="let stock of stocks">
           <td>{{ stock.instrument.instrumentDescription }}</td>
           <td>{{ stock.askPrice | currency }}</td>
           <td>{{ stock.bidPrice | currency }}</td>
@@ -35,7 +35,7 @@
             </button>
           </td>
         </tr>
-        <tr *ngIf="(stocks | tableFilter : filterTerm).length === 0">
+        <tr *ngIf="(stocks).length === 0">
           <td colspan="4" class="text-center">No Stocks Available</td>
         </tr>
       </tbody>
