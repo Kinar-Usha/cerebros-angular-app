@@ -1,111 +1,203 @@
 <section *ngIf="!authService.isLoggedIn" class="mt-0">
-    <div class="flex flex-col items-center px-6 py-8 mx-auto lg:py-0">
-        <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <h1
-                    class="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                    Create an account
-                </h1>
-                <form class="space-y-4 md:space-y-6">
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label for="name">Full Name</label>
-                            <input type="text" name="name" id="name" placeholder="John Doe" required
-                                [(ngModel)]="client.person.name" />
-                        </div>
-                        <div>
-                            <label for="email">Email</label>
-                            <input type="email" name="email" id="email" autocomplete="email"
-                                placeholder="name@company.com" required [(ngModel)]="client.person.email" />
-                        </div>
-                        <div>
-                            <label for="dob">Date of Birth</label>
-                            <input type="date" name="dob" id="dob" placeholder="YYYY-MM-DD" required
-                                [(ngModel)]="client.person.dateOfBirth" [(ngModel)]="dateOfBirth" />
-                        </div>
-
-                        <div>
-                            <label for="country">Country</label>
-                            <select id="country" name="country" required [(ngModel)]="client.person.country"
-                                #power="ngModel">
-                                <option *ngFor="let pow of countries" [value]="pow">{{ pow }}</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label for="postalCode">Postal Code</label>
-                            <input type="text" name="postalCode" placeholder="10xxxx" required
-                                [(ngModel)]="client.person.postalCode" />
-                        </div>
-
-                        <div *ngIf="client.person.country == ''">
-                            <label for="type">Government Id</label>
-                            <input type="text" id="type_us"
-                                class="disabled:cursor-not-allowed disabled:dark:bg-gray-800" disabled
-                                placeholder="Select country to add a government ID" />
-                        </div>
-
-                        <div *ngIf="client.person.country == 'INDIA'">
-                            <label for="type">Aadhaar No.</label>
-                            <input type="text" id="type_india" required
-                                [(ngModel)]="client.clientIdentifications[0].value" name="type_india" #type="ngModel" />
-                        </div>
-
-                        <div *ngIf="client.person.country == 'USA'">
-                            <label for="type">SSN</label>
-                            <input type="text" id="type_us" required [(ngModel)]="client.clientIdentifications[0].value"
-                                name="type_us" #typeUs="ngModel" />
-
-                        </div>
-
-                        <div *ngIf="client.person.country == 'IRELAND'">
-                            <label for="type">Passport No.</label>
-                            <input type="text" id="type_us" required [(ngModel)]="client.clientIdentifications[0].value"
-                                name="type_us" #typeUs="ngModel" />
-                        </div>
-
-
-
-
-                        <div>
-                            <label for="password">Create Password</label>
-                            <input type="password" name="password" autocomplete="new-password" id="password"
-                                placeholder="••••••••" required [(ngModel)]="client.password" />
-                        </div>
-
-                        <div>
-                            <label for="confirmPassword">Confirm Password</label>
-                            <input type="password" name="confirmPassword" autocomplete="new-password"
-                                id="confirmPassword" placeholder="••••••••" required [(ngModel)]="confirmPassword" />
-                            <div *ngIf="client.password !== confirmPassword" class="text-red-500 text-xs">Passwords do
-                                not
-                                match</div>
-                        </div>
-
-
-
-
-                    </div>
-                    <button type="submit" variant="primary" class="w-full" (click)="register()">
-                        Sign Up
-                    </button>
-                    <div *ngIf="error"
-                        class="w-full bg-red-600 text-white font-bold text-center p-1 mb-3 rounded-md flex items-center justify-center gap-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
-                        </svg>
-
-                        <span>{{ error }}</span>
-                    </div>
-                    <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                        Already have an account?
-                        <a routerLink="/login"
-                            class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login</a>
-                    </p>
-                </form>
+  <div class="flex flex-col items-center px-6 py-8 mx-auto lg:py-0">
+    <div
+      class="w-full bg-white rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:border-gray-700"
+    >
+      <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+        <h1
+          class="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"
+        >
+          Create an account
+        </h1>
+        <form class="space-y-4 md:space-y-6">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="name">Full Name</label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="John Doe"
+                required
+                [(ngModel)]="client.person.name"
+              />
             </div>
-        </div>
+            <div>
+              <label for="email">Email</label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                autocomplete="email"
+                placeholder="name@company.com"
+                required
+                [(ngModel)]="client.person.email"
+                (change)="validateEmail()"
+              />
+              <div *ngIf="validationError.email" class="val-error">
+                {{ validationError.email }}
+              </div>
+            </div>
+            <div>
+              <label for="dob">Date of Birth</label>
+              <input
+                type="date"
+                name="dob"
+                id="dob"
+                placeholder="YYYY-MM-DD"
+                required
+                [(ngModel)]="client.person.dateOfBirth"
+                (change)="validateDateOfBirth()"
+              />
+              <div *ngIf="validationError.dateOfBirth" class="val-error">
+                {{ validationError.dateOfBirth }}
+              </div>
+            </div>
+
+            <div>
+              <label for="country">Country</label>
+              <select
+                id="country"
+                name="country"
+                required
+                [(ngModel)]="client.person.country"
+                #power="ngModel"
+              >
+                <option *ngFor="let pow of countries" [value]="pow">
+                  {{ pow }}
+                </option>
+              </select>
+            </div>
+
+            <div>
+              <label for="postalCode">Postal Code</label>
+              <input
+                type="text"
+                name="postalCode"
+                placeholder="10xxxx"
+                required
+                [(ngModel)]="client.person.postalCode"
+                maxlength="7"
+              />
+            </div>
+
+            <div *ngIf="client.person.country == ''">
+              <label for="type">Government Id</label>
+              <input
+                type="text"
+                id="type_us"
+                class="disabled:cursor-not-allowed disabled:dark:bg-gray-800"
+                disabled
+                placeholder="Select country to add a government ID"
+              />
+            </div>
+
+            <div *ngIf="client.person.country != ''">
+              <label for="type" *ngIf="client.person.country == 'INDIA'"
+                >Aadhaar No.</label
+              >
+              <label for="type" *ngIf="client.person.country == 'USA'"
+                >SSN</label
+              >
+              <label for="type" *ngIf="client.person.country == 'IRELAND'"
+                >Passport No.</label
+              >
+              <input
+                type="text"
+                id="idNumber"
+                required
+                [(ngModel)]="client.clientIdentifications[0].value"
+                name="idNumber"
+                #type="ngModel"
+                (change)="validateIdentificationNumber()"
+                [value]="
+                  client.clientIdentifications[0].value
+                    | hyphenate : client.person.country
+                "
+              />
+              <div
+                *ngIf="validationError.identificationNumber"
+                class="val-error"
+              >
+                {{ validationError.identificationNumber }}
+              </div>
+            </div>
+
+            <div>
+              <label for="password">Create Password</label>
+              <input
+                type="password"
+                name="password"
+                autocomplete="new-password"
+                id="password"
+                placeholder="••••••••"
+                required
+                [(ngModel)]="client.password"
+                (change)="validatePassword()"
+              />
+              <div *ngIf="validationError.password" class="val-error">
+                {{ validationError.password }}
+              </div>
+            </div>
+
+            <div>
+              <label for="confirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                name="confirmPassword"
+                autocomplete="new-password"
+                id="confirmPassword"
+                placeholder="••••••••"
+                required
+                [(ngModel)]="confirmPassword"
+              />
+              <div
+                *ngIf="client.password !== confirmPassword"
+                class="text-red-500 text-xs"
+              >
+                Passwords do not match
+              </div>
+            </div>
+          </div>
+          <button
+            type="submit"
+            variant="primary"
+            class="w-full"
+            (click)="register()"
+          >
+            Sign Up
+          </button>
+          <div
+            *ngIf="error"
+            class="w-full bg-red-600 text-white font-bold text-center p-1 mb-3 rounded-md flex items-center justify-center gap-1"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+              />
+            </svg>
+
+            <span>{{ error }}</span>
+          </div>
+          <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+            Already have an account?
+            <a
+              routerLink="/login"
+              class="font-medium text-primary-600 hover:underline dark:text-primary-500"
+              >Login</a
+            >
+          </p>
+        </form>
+      </div>
     </div>
+  </div>
 </section>

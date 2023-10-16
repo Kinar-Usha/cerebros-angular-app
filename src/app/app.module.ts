@@ -11,9 +11,10 @@ import { TraderRoutingModule } from './trader/trader-routing.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegisterComponent } from './register/register.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { IdMaskPipe } from './pipes/id-mask.pipe';
+import { HyphenatePipe } from './pipes/hyphenate.pipe';
 
 
 @NgModule({
@@ -24,12 +25,14 @@ import { IdMaskPipe } from './pipes/id-mask.pipe';
     PageNotFoundComponent,
     NavbarComponent,
     RegisterComponent,
+    HyphenatePipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     TraderRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
   ],
   providers: [],
