@@ -10,7 +10,7 @@ export class PortfolioService {
 
 
   private baseUrl = 'http://localhost:8082/portfolio/';
-  private cashUrl = 'http://localhost:8082/';
+  private cashUrl = 'http://localhost:8080';
 
 
   constructor(private http: HttpClient) { }
@@ -19,8 +19,15 @@ export class PortfolioService {
     const url = `${this.baseUrl}${clientId}`;
     return this.http.get<Portfolio[]>(url);
   }
+
   getCash(clientId: string): Observable<any> {
-    const url = `${this.cashUrl}cash/${clientId}`;
+    const url = `${this.cashUrl}/cash/${clientId}`;
     return this.http.get<any>(url);
+  }
+
+  updateCash(clientId: string, cashRemaining: number): Observable<any> {
+    const url = `${this.cashUrl}/updateCash`;
+    const body = { clientId, cashRemaining };
+    return this.http.post<any>(url, body);
   }
 }

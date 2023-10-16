@@ -18,9 +18,14 @@ export class ProfileComponent {
   time = ['Short-term', 'Medium-term', 'Long-term'];
   income = ['Low', 'Middle', 'High'];
 
+  prefMessage: string = '';
+  cashMessage: string = '';
+
   prefForm: FormGroup = new FormGroup({});
   client: Client | null = this.authService.client;
   cash: number = 0.0;
+
+  addCash: number = 0.0;
 
   // preferences = new Preferences(null, null, null, null);
 
@@ -35,14 +40,14 @@ export class ProfileComponent {
     console.log(this.client);
     this.client = this.authService.client;
     if (this.client) {
-    
+
       this.portfolioService.getCash(this.client.clientId).subscribe(cash => {
         this.cash = cash ? (cash).cashRemaining : 0;
         console.log(this.cash);
         console.log("cash");
       });
 
- 
+
     }
     else {
       //TODO a better way to do this
@@ -61,23 +66,44 @@ export class ProfileComponent {
     });
   }
 
+  updateCashBalance() {
+    if (this.client) {
+      this.portfolioService.updateCash(this.client.clientId, this.addCash + this.cash).subscribe((data) => {
+        console.log(data);
+        this.cash += this.addCash;
+        this.addCash = 0;
+
+        this.cashMessage = "Cash Added Successfully";
+
+        setTimeout(() => {
+          this.cashMessage = "";
+        }, 3000);
+      });
+    }
+  }
+
 
   savePreferences() {
     try {
-      if(this.client){      
-    this.authService.savePreferences(this.client.clientId,new Preferences(this.prefForm.value.purpose,this.prefForm.value.risk,this.prefForm.value.time,this.prefForm.value.income)).subscribe((data)=>{
-    console.log(data)
-    });
-}
-    } 
-      catch (error) {
+      if (this.client) {
+        this.authService.savePreferences(this.client.clientId, new Preferences(this.prefForm.value.purpose, this.prefForm.value.risk, this.prefForm.value.time, this.prefForm.value.income)).subscribe((data) => {
+          console.log(data)
+          this.prefMessage = "Preferences Saved";
+
+          setTimeout(() => {
+            this.prefMessage = "";
+          }, 3000);
+        });
+      }
+    }
+    catch (error) {
       console.log(error);
       alert(error);
       //Done change to a notification system.
     }
   }
 
- 
+
 
 
 }

@@ -1,87 +1,169 @@
 <div class="grid grid-cols-2 gap-4">
-    <section class="space-y-4">
-        <div id="identifications" class="card">
-            <h4 class="mb-4">Your Government Identifications</h4>
-            <div *ngFor="let id of client?.clientIdentifications"
-                class="rounded-md mb-2 flex items-center justify-start gap-4 p-4 bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-14 h-14">
-                    <path fill-rule="evenodd"
-                        d="M4.5 3.75a3 3 0 00-3 3v10.5a3 3 0 003 3h15a3 3 0 003-3V6.75a3 3 0 00-3-3h-15zm4.125 3a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zm-3.873 8.703a4.126 4.126 0 017.746 0 .75.75 0 01-.351.92 7.47 7.47 0 01-3.522.877 7.47 7.47 0 01-3.522-.877.75.75 0 01-.351-.92zM15 8.25a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5H15zM14.25 12a.75.75 0 01.75-.75h3.75a.75.75 0 010 1.5H15a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5H15z"
-                        clip-rule="evenodd" />
-                </svg>
-                <div class="">
-                    <p class="font-semibold">{{id.type}}</p>
-                    <p class="font-mono">{{id.value | idMask }}</p>
-                </div>
-            </div>
+  <section class="space-y-4">
+    <div id="identifications" class="card">
+      <h4 class="mb-4">Your Government Identifications</h4>
+      <div
+        *ngFor="let id of client?.clientIdentifications"
+        class="rounded-md mb-2 flex items-center justify-start gap-4 p-4 bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="w-14 h-14"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M4.5 3.75a3 3 0 00-3 3v10.5a3 3 0 003 3h15a3 3 0 003-3V6.75a3 3 0 00-3-3h-15zm4.125 3a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zm-3.873 8.703a4.126 4.126 0 017.746 0 .75.75 0 01-.351.92 7.47 7.47 0 01-3.522.877 7.47 7.47 0 01-3.522-.877.75.75 0 01-.351-.92zM15 8.25a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5H15zM14.25 12a.75.75 0 01.75-.75h3.75a.75.75 0 010 1.5H15a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5H15z"
+            clip-rule="evenodd"
+          />
+        </svg>
+        <div class="">
+          <p class="font-semibold">{{ id.type }}</p>
+          <p class="font-mono">{{ id.value | idMask }}</p>
         </div>
+      </div>
+    </div>
 
-        <div id="cashBalance" class="card">
-            <h4 class="mb-2">Your Cash Balance</h4>
-            <p *ngIf="cash != null" class="font-mono font-bold text-4xl">
-                {{cash | currency }}
-            </p>
-            <div *ngIf="cash === null">
-                <p class="font-mono font-bold text-4xl">
-                    $0.00
-                </p>
-                <p class="text-sm text-gray-500 dark:text-gray-400">
-                    You have not deposited any funds yet.
-                </p>
-                <!-- TODO: Add button for depositing money and insert new cash balance row in DB -->
-            </div>
-        </div>
-    </section>
-
-    <section class="card">
-        <h4 class="mb-2">Investment Preferences</h4>
-        <p class="mb-2">
-            Please fill out the following information to help us tailor your investment
-            experience.
+    <div id="cashBalance" class="card">
+      <h4 class="mb-2">Your Cash Balance</h4>
+      <p *ngIf="cash != null" class="font-mono font-bold text-4xl">
+        {{ cash | currency }}
+      </p>
+      <div *ngIf="cash === null">
+        <p class="font-mono font-bold text-4xl">$0.00</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          You have not deposited any funds yet.
         </p>
+      </div>
+      <form class="mt-8">
+        <!-- Add Cash -->
+        <label for="addCash" class="text-lg">Add Cash (USD)</label>
+        <div class="grid grid-cols-2 gap-2">
+          <input
+            type="number"
+            class="text-lg"
+            name="addCash"
+            id="addCash"
+            placeholder="$0.00"
+            required
+            [(ngModel)]="addCash"
+          />
+          <button type="submit" variant="primary" (click)="updateCashBalance()">
+            Confirm and Pay via AutoDebit
+          </button>
+        </div>
+        <div
+          *ngIf="cashMessage"
+          class="w-full mt-4 bg-green-600 text-white font-bold text-center p-1 mb-3 rounded-md flex items-center justify-center gap-1"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
 
-        <form [formGroup]="prefForm" (ngSubmit)="savePreferences()">
-            <div class="mb-3">
-                <label for="purpose">Investment Purpose</label>
-                <select id="purpose" required formControlName="purpose">
-                    <option *ngFor="let pup of purpose" [value]="pup">{{ pup }}</option>
-                </select>
-            </div>
+          <span>{{ cashMessage }}</span>
+        </div>
+      </form>
+    </div>
+  </section>
 
-            <div class="mb-3">
-                <label for="income">Income Category</label>
-                <select id="income" required formControlName="income">
-                    <option *ngFor="let i of income" [value]="i">{{ i }}</option>
-                </select>
-            </div>
+  <section class="card">
+    <h4 class="mb-2">Investment Preferences</h4>
+    <p class="mb-2">
+      Please fill out the following information to help us tailor your
+      investment experience.
+    </p>
 
-            <div class="mb-3">
-                <label for="risk">Risk Tolerance</label>
-                <select id="risk" required formControlName="risk">
-                    <option *ngFor="let r of risk" [value]="r">{{ r }}</option>
-                </select>
-            </div>
+    <form [formGroup]="prefForm" (ngSubmit)="savePreferences()">
+      <div class="mb-3">
+        <label for="purpose">Investment Purpose</label>
+        <select id="purpose" required formControlName="purpose">
+          <option *ngFor="let pup of purpose" [value]="pup">{{ pup }}</option>
+        </select>
+      </div>
 
-            <div class="mb-3">
-                <label for="time">Investment Timeline</label>
-                <select id="time" required formControlName="time">
-                    <option *ngFor="let t of time" [value]="t">{{ t }}</option>
-                </select>
-            </div>
+      <div class="mb-3">
+        <label for="income">Income Category</label>
+        <select id="income" required formControlName="income">
+          <option *ngFor="let i of income" [value]="i">{{ i }}</option>
+        </select>
+      </div>
 
-            <div class="flex items-start mb-6">
-                <div class="flex items-center h-5">
-                    <input id="agreeTerms" type="checkbox" required formControlName="agreeTerms" />
-                </div>
-                <label for="agreeTerms" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with
-                    the
-                    <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>
-                    of allowing Robo-Advisor to use my preferences to suggest trades.</label>
-            </div>
-            <button type="submit" variant="primary" class="w-full" [disabled]="!prefForm.valid || prefForm.pristine">
-                Save Preferences
-            </button>
-        </form>
-    </section>
+      <div class="mb-3">
+        <label for="risk">Risk Tolerance</label>
+        <select id="risk" required formControlName="risk">
+          <option *ngFor="let r of risk" [value]="r">{{ r }}</option>
+        </select>
+      </div>
 
+      <div class="mb-3">
+        <label for="time">Investment Timeline</label>
+        <select id="time" required formControlName="time">
+          <option *ngFor="let t of time" [value]="t">{{ t }}</option>
+        </select>
+      </div>
+
+      <div class="flex items-start mb-6">
+        <div class="flex items-center h-5">
+          <input
+            id="agreeTerms"
+            type="checkbox"
+            required
+            formControlName="agreeTerms"
+          />
+        </div>
+        <label
+          for="agreeTerms"
+          class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >I agree with the
+          <a href="#" class="text-blue-600 hover:underline dark:text-blue-500"
+            >terms and conditions</a
+          >
+          of allowing Robo-Advisor to use my preferences to suggest
+          trades.</label
+        >
+      </div>
+      <button
+        type="submit"
+        variant="primary"
+        class="w-full"
+        [disabled]="!prefForm.valid || prefForm.pristine"
+      >
+        Save Preferences
+      </button>
+
+      <div
+        *ngIf="prefMessage"
+        class="w-full mt-4 bg-green-600 text-white font-bold text-center p-1 mb-3 rounded-md flex items-center justify-center gap-1"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+
+        <span>{{ prefMessage }}</span>
+      </div>
+    </form>
+  </section>
 </div>
