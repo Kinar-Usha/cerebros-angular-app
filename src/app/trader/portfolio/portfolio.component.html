@@ -45,6 +45,9 @@
                 <td>{{item.price|currency}}</td>
                 <td>{{item.holdings* item.price|currency}}</td>
             </tr>
+            <tr *ngIf="(portfolio | tableFilter:filterTerm).length === 0">
+                <td colspan="6" class="text-center">No Data Available</td>
+            </tr>
         </tbody>
     </table>
 </div>
