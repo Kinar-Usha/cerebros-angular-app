@@ -10,10 +10,11 @@ import { TableFilterPipe } from '../pipes/table-filter.pipe';
 import { FormsModule } from '@angular/forms';
 import { TradeHistoryComponent } from './trade-history/trade-history.component';
 import { TradeDialogComponent } from './trade-dialog/trade-dialog.component';
+import { RoboadvisorComponent } from './roboadvisor/roboadvisor.component';
 
 
 @NgModule({
-  declarations: [TraderComponent, DashboardComponent, PortfolioComponent, ProfileComponent,TableFilterPipe, TradeHistoryComponent, TradeDialogComponent],
+  declarations: [TraderComponent, DashboardComponent, PortfolioComponent, ProfileComponent,TableFilterPipe, TradeHistoryComponent, TradeDialogComponent, RoboadvisorComponent],
   imports: [CommonModule, TraderRoutingModule,FormsModule],
 })
 export class TraderModule {}
