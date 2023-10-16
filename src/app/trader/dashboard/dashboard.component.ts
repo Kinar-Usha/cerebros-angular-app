@@ -65,6 +65,7 @@ export class DashboardComponent {
     this.selectedPrice = askPrice;
     this.selectedAction = action;
     console.log(this.selectedInstrument);
+
     this.router.navigate(['/trader/trade'], {
       state: { selectedInstrument, selectedAction: this.selectedAction, selectedPrice: askPrice },
     });

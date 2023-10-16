@@ -1,10 +1,32 @@
-<h2 class="mb-4">
-  My
-  <span
-    class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-rose-600"
-    >Portfolio</span
-  >
-</h2>
+<div class="flex items-center justify-between mb-4">
+  <h2>
+    My
+    <span
+      class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-rose-600"
+      >Portfolio</span
+    >
+  </h2>
+  <div class="flex justify-end">
+    <button variant="primary" class="flex items-center justify-between gap-2" (click)="downloadCSV()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+        />
+      </svg>
+
+      <span>Activity Report</span>
+    </button>
+  </div>
+</div>
 
 <section>
   <div class="my-4">
@@ -26,7 +48,9 @@
         <p class="text-md font-medium text-gray-700 dark:text-gray-300">
           Portfolio Value
         </p>
-        <div class="w-4 h-4 rounded-full bg-gradient-to-r from-purple-600 to-rose-400"></div>
+        <div
+          class="w-4 h-4 rounded-full bg-gradient-to-r from-purple-600 to-rose-400"
+        ></div>
       </div>
       <p class="text-3xl font-bold">{{ totalHoldings | currency }}</p>
     </div>
@@ -36,7 +60,9 @@
         <p class="text-md font-medium text-gray-700 dark:text-gray-300">
           Available Cash
         </p>
-        <div class="w-4 h-4 rounded-full bg-gradient-to-r from-emerald-600 to-green-400"></div>
+        <div
+          class="w-4 h-4 rounded-full bg-gradient-to-r from-emerald-600 to-green-400"
+        ></div>
       </div>
       <p class="text-3xl font-bold">{{ cash | currency }}</p>
     </div>
