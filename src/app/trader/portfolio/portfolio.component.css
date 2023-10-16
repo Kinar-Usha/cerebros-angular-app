@@ -19,5 +19,5 @@ table {
   }
   
   td {
-    @apply px-6 py-3 w-1/4;
+    @apply text-white px-6 py-3 w-1/4;
   }

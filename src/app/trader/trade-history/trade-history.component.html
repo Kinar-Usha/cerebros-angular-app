@@ -16,12 +16,12 @@
         </thead>
         <tbody>
             <tr *ngFor="let trade of trades.reverse()|tableFilter:filterTerm">
-                <td>{{trade.instrumentId}}</td>
-                <td>{{trade.description}}</td>
-                <td>{{trade.direction}}</td>
-                <td>{{trade.executionPrice|currency}}</td>
-                <td>{{trade.quantity}}</td>
-                <td>{{trade.cashValue|currency}}</td>
+                <td class="text-white">{{trade.instrumentId}}</td>
+                <td class="text-white">{{trade.description}}</td>
+                <td class="text-white">{{trade.direction}}</td>
+                <td class="text-white">{{trade.executionPrice|currency}}</td>
+                <td class="text-white">{{trade.quantity}}</td>
+                <td class="text-white">{{trade.cashValue|currency}}</td>
             </tr>
             <tr *ngIf="(trades | tableFilter:filterTerm).length === 0">
                 <td colspan="6" class="text-center">No Data Available</td>
