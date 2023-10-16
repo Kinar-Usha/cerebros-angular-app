@@ -16,6 +16,7 @@ export class AuthService {
   // store the URL so we can redirect after logging in
   redirectUrl: string | null = null;
   baseUrl: string = 'http://localhost:8082';
+  backendUrl: string = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
 
@@ -103,6 +104,8 @@ export class AuthService {
 
   get client(): Client | null {
     const clientString = sessionStorage.getItem('client');
+    console.log(sessionStorage.getItem('client'));
+    console.log("in get client")
 
     if (clientString) {
       let clientJson = JSON.parse(clientString);
