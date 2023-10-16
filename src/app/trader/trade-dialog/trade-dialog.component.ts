@@ -37,8 +37,8 @@ export class TradeDialogComponent implements OnInit {
     } else {
       this.router.navigate(['../'], { relativeTo: this.route });
     }
-  } 
-  
+  }
+
   ngOnInit(): void {
 
   }
@@ -74,6 +74,10 @@ export class TradeDialogComponent implements OnInit {
       console.log(data);
 
       this.statusMessage = 'Placed Order';
+
+      setTimeout(() => {
+        this.router.navigate(['/trader/portfolio']);
+      }, 1000);
     },
       error => {
         console.log(error);
