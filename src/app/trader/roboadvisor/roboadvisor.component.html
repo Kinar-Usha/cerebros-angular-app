@@ -27,15 +27,15 @@
             >
               Buy
             </button>
-            <button
+            <!-- <button
               class="sell-btn"
               (click)="openTradeModal(stock.instrument, stock.bidPrice, 'S')"
             >
               Sell
-            </button>
+            </button> -->
           </td>
         </tr>
-        <tr *ngIf="(stocks).length === 0">
+        <tr *ngIf="stocks.length === 0">
           <td colspan="4" class="text-center">No Stocks Available</td>
         </tr>
       </tbody>
@@ -62,12 +62,12 @@
             >
               Buy
             </button>
-            <button
+            <!-- <button
               class="sell-btn"
               (click)="openTradeModal(bond.instrument, bond.bidPrice, 'S')"
             >
               Sell
-            </button>
+            </button> -->
           </td>
         </tr>
         <tr *ngIf="(bonds | tableFilter : filterTerm).length === 0">
@@ -97,12 +97,12 @@
             >
               Buy
             </button>
-            <button
+            <!-- <button
               class="sell-btn"
               (click)="openTradeModal(cd.instrument, cd.bidPrice, 'S')"
             >
               Sell
-            </button>
+            </button> -->
           </td>
         </tr>
         <tr *ngIf="(cds | tableFilter : filterTerm).length === 0">
