@@ -17,7 +17,6 @@ export class AuthService {
   // store the URL so we can redirect after logging in
   redirectUrl: string | null = null;
   baseUrl: string = 'http://localhost:8082';
-  backendUrl: string = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
 
