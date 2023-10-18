@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'starter';
+  title = 'cerebros';
   currentYear = new Date().getFullYear();
 
-  constructor(public authService: AuthService, public router: Router) {}
+  constructor(public authService: AuthService, public router: Router) { }
 
   ngOnInit() {
     document.documentElement.classList.add('dark');

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Starter": {
+    "Cerebros": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,20 +13,13 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/starter",
+            "outputPath": "dist/cerebros",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.css"],
             "scripts": []
           },
           "configurations": {
@@ -39,8 +32,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "4kb",
+                  "maximumError": "6kb"
                 }
               ],
               "outputHashing": "all"
@@ -60,10 +53,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Starter:build:production"
+              "browserTarget": "Cerebros:build:production"
             },
             "development": {
-              "browserTarget": "Starter:build:development"
+              "browserTarget": "Cerebros:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,35 +64,27 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Starter:build"
+            "browserTarget": "Cerebros:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.css"],
             "scripts": []
           }
         },
         "cypress-run": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "Starter:serve"
+            "devServerTarget": "Cerebros:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Starter:serve:production"
+              "devServerTarget": "Cerebros:serve:production"
             }
           }
         },
@@ -113,13 +98,13 @@
         "e2e": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "Starter:serve",
+            "devServerTarget": "Cerebros:serve",
             "watch": true,
             "headless": false
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Starter:serve:production"
+              "devServerTarget": "Cerebros:serve:production"
             }
           }
         }
@@ -127,10 +112,7 @@
     }
   },
   "cli": {
-    "schematicCollections": [
-      "@schematics/angular",
-      "@cypress/schematic"
-    ],
+    "schematicCollections": ["@schematics/angular", "@cypress/schematic"],
     "analytics": "3513e759-0f25-4916-8feb-2247ea38eb48"
   }
 }
